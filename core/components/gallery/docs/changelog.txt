@@ -1,5 +1,15 @@
 Changelog for Gallery.
 
+Gallery 1.6.0
+====================================
+- [#205] Add per page box to paging bar in album items view
+- [#108] Improve drag/drop reorder of items in manager by supressing refresh
+- [#192] Fix issues with deactivating items, albums
+- [#198] Fix sort of albums due to urldecode issue
+- Better optimization of DB fields
+- [#197], [#188] Fix issues with upload and file names
+- [#208] Prevent sorting in drag/drop when target and source is the same
+
 Gallery 1.5.0
 ====================================
 - Gallery 1.5+ only supports MODX 2.2+ and greater
