@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -21,7 +21,8 @@
  */
 /**
  * Events for GalleryCustomTV plugin
- * 
+ *
+ * @var modX $modx
  * @package gallery
  * @subpackage build
  */
@@ -33,6 +34,7 @@ $evs = array(
     'OnTVOutputRenderList',
     'OnTVOutputRenderPropertiesList',
     'OnDocFormPrerender',
+    'OnManagerPageBeforeRender',
 );
 
 foreach ($evs as $ev) {

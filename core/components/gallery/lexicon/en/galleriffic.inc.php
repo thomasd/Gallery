@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -29,6 +29,6 @@ $_lang['gallery.photo_previous'] = 'Previous Photo';
 $_lang['gallery.next'] = 'Next';
 $_lang['gallery.prev'] = 'Prev';
 $_lang['gallery.slideshow_pause'] = 'Pause Slideshow';
-$_lang['gallery.slideshow_play'] = 'Play Sideshow';
+$_lang['gallery.slideshow_play'] = 'Play Slideshow';
 $_lang['gallery.tags'] = 'Tags';
 

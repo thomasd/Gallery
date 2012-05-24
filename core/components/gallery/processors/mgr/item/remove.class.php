@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -24,26 +24,9 @@
  *
  * @package gallery
  */
-if (empty($scriptProperties['ids'])) return $modx->error->failure($modx->lexicon('gallery.item_err_ns'));
-
-$separator = $modx->getOption('separator',$scriptProperties,',');
-$ids = explode($separator,$scriptProperties['ids']);
-
-$errors = array();
-foreach ($ids as $id) {
-    /* get item */
-    $item = $modx->getObject('galItem',$id);
-    if (empty($item)) {
-        $errors[] = $modx->lexicon('gallery.item_err_nf').': '.$id;
-        continue;
-    }
-
-    /* remove item */
-    if (!$item->remove()) {
-        $errors[] = $modx->lexicon('gallery.item_err_remove').': '.$id;
-    }
+class GalleryItemRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'galItem';
+    public $objectType = 'gallery.item';
+    public $languageTopics = array('gallery:default');
 }
-
-if (!empty($errors)) return $modx->error->failure(implode('<br />',$errors));
-
-return $modx->error->success();
+return 'GalleryItemRemoveProcessor';

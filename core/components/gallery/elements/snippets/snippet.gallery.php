@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -22,6 +22,9 @@
 /**
  * The main Gallery snippet.
  *
+ * @var modX $modx
+ * @var Gallery $gallery
+ * 
  * @package gallery
  */
 $gallery = $modx->getService('gallery','Gallery',$modx->getOption('gallery.core_path',null,$modx->getOption('core_path').'components/gallery/').'model/gallery/',$scriptProperties);
@@ -44,6 +47,8 @@ $imageGetParam = $modx->getOption('imageGetParam',$scriptProperties,'galItem');
 $albumRequestVar = $modx->getOption('albumRequestVar',$scriptProperties,'galAlbum');
 $tagRequestVar = $modx->getOption('tagRequestVar',$scriptProperties,'galTag');
 $itemCls = $modx->getOption('itemCls',$scriptProperties,'gal-item');
+$activeCls = $modx->getOption('activeCls',$scriptProperties,'gal-item-active');
+$highlightItem = $modx->getOption($imageGetParam,$_REQUEST,false);
 
 /* check for REQUEST vars if property set */
 if ($modx->getOption('checkForRequestAlbumVar',$scriptProperties,true)) {
@@ -71,6 +76,7 @@ if (!empty($album)) {
     $albumField = is_numeric($album) ? 'id' : 'name';
 
     $albumWhere = $albumField == 'name' ? array('name' => $album) : $album;
+    /** @var galAlbum $album */
     $album = $modx->getObject('galAlbum',$albumWhere);
     if (empty($album)) return '';
     $c->where(array(
@@ -120,6 +126,7 @@ if (!empty($plugin)) {
     if (empty($pluginPath)) {
         $pluginPath = $gallery->config['modelPath'].'gallery/plugins/';
     }
+    /** @var GalleryPlugin $plugin */
     if (($className = $modx->loadClass($plugin,$pluginPath,true,true))) {
         $plugin = new $className($gallery,$scriptProperties);
         $plugin->load();
@@ -157,14 +164,20 @@ $thumbProperties = array_merge(array(
 ),$thumbProperties);
 
 $idx = 0;
+$filesUrl = $modx->call('galAlbum','getFilesUrl',array(&$modx));
+$filesPath = $modx->call('galAlbum','getFilesPath',array(&$modx));
+/** @var galItem $item */
 foreach ($items as $item) {
     $itemArray = $item->toArray();
     $itemArray['idx'] = $idx;
     $itemArray['cls'] = $itemCls;
+    if ($itemArray['id'] == $highlightItem) {
+        $itemArray['cls'] .= ' '.$activeCls;
+    }
     $itemArray['filename'] = basename($item->get('filename'));
-    $itemArray['image_absolute'] = $modx->getOption('gallery.files_url').$item->get('filename');
+    $itemArray['image_absolute'] = $filesUrl.$item->get('filename');
     $itemArray['fileurl'] = $itemArray['image_absolute'];
-    $itemArray['filepath'] = $modx->getOption('gallery.files_path').$item->get('filename');
+    $itemArray['filepath'] = $filesPath.$item->get('filename');
     $itemArray['filesize'] = $item->get('filesize');
     $itemArray['thumbnail'] = $item->get('thumbnail',$thumbProperties);
     $itemArray['image'] = $item->get('thumbnail',$imageProperties);
@@ -187,6 +200,8 @@ if (!empty($containerTpl)) {
         'thumbnails' => $output,
         'album_name' => $galleryName,
         'album_description' => $galleryDescription,
+        'albumRequestVar' => $albumRequestVar,
+        'albumId' => $galleryId,
     ));
     if (!empty($ct)) $output = $ct;
 }

@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -22,6 +22,12 @@
 /**
  * Resolve paths
  *
+ * @var modX $modx
+ * @var string $key
+ * @var string $value
+ * @var xPDOObject $object
+ * @var array $options
+ *
  * @package gallery
  * @subpackage build
  */
@@ -30,6 +36,7 @@ function createSetting(&$modx,$key,$value) {
         'key' => 'gallery.'.$key,
     ));
     if (empty($ct)) {
+        /** @var modSystemSetting $setting */
         $setting = $modx->newObject('modSystemSetting');
         $setting->set('key','gallery.'.$key);
         $setting->set('value',$value);
@@ -41,22 +48,18 @@ function createSetting(&$modx,$key,$value) {
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-        case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
 
             /* setup paths */
-            createSetting($modx,'core_path',$modx->getOption('core_path').'components/gallery/');
-            createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/gallery/');
-            createSetting($modx,'files_path',$modx->getOption('assets_path').'components/gallery/files/');
-            createSetting($modx,'phpthumb_path',$modx->getOption('assets_path').'components/phpthumb/');
+            createSetting($modx,'files_path','[[++assets_path]]gallery/');
 
-            @mkdir($modx->getOption('assets_path').'components/gallery/files/',0775);
+            @mkdir($modx->getOption('assets_path').'gallery/',0775);
 
             /* setup urls */
-            createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/gallery/');
-            createSetting($modx,'files_url',$modx->getOption('assets_url').'components/gallery/files/');
-            createSetting($modx,'phpthumb_url',$modx->getOption('assets_url').'components/phpthumb/');
+            createSetting($modx,'files_url','[[++assets_url]]gallery/');
         break;
+        case xPDOTransport::ACTION_UPGRADE:
+            break;
     }
 }
 return true;

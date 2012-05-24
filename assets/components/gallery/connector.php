@@ -2,7 +2,7 @@
 /**
  * Gallery Connector
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * This file is part of Gallery.
  *
@@ -24,9 +24,11 @@
 /**
  * Gallery Connector
  *
+ * @var modX $modx
  * @package gallery
  */
-if ($_REQUEST['action'] == 'web/phpthumb') {
+if (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'web/phpthumb') {
+	@session_cache_limiter('public');
     define('MODX_REQP',false);
 }
 require_once dirname(dirname(dirname(dirname(__FILE__)))).'/config.core.php';
@@ -40,7 +42,18 @@ $modx->gallery = new Gallery($modx);
 $modx->lexicon->load('gallery:default');
 
 if ($_REQUEST['action'] == 'web/phpthumb') {
-    $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
+    $version = $modx->getVersionData();
+    if (version_compare($version['full_version'],'2.1.1-pl') >= 0) {
+        if ($modx->user->hasSessionContext($modx->context->get('key'))) {
+            $_SERVER['HTTP_MODAUTH'] = $_SESSION["modx.{$modx->context->get('key')}.user.token"];
+        } else {
+            $_SESSION["modx.{$modx->context->get('key')}.user.token"] = 0;
+            $_SERVER['HTTP_MODAUTH'] = 0;
+        }
+    } else {
+        $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
+    }
+    $_REQUEST['HTTP_MODAUTH'] = $_SERVER['HTTP_MODAUTH'];
 }
 
 /* handle request */

@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -21,21 +21,14 @@
  */
 /**
  * @package gallery
- * @subpackage processors
+ * @subpackage galleriffic
  */
-/* get board */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('gallery.album_err_ns'));
-$album = $modx->getObject('galAlbum',$scriptProperties['id']);
-if (!$album) return $modx->error->failure($modx->lexicon('gallery.album_err_nf'));
+$_lang['gallery.download_original'] = 'Download Originee;';
+$_lang['gallery.photo_next'] = 'Volgende Foto';
+$_lang['gallery.photo_previous'] = 'Vorige Foto';
+$_lang['gallery.next'] = 'Volgende';
+$_lang['gallery.prev'] = 'Vorige';
+$_lang['gallery.slideshow_pause'] = 'Pauzeer Slideshow';
+$_lang['gallery.slideshow_play'] = 'Slideshow Afspelen';
+$_lang['gallery.tags'] = 'Tags';
 
-$scriptProperties['active'] = !empty($scriptProperties['active']) ? 1 : 0;
-$scriptProperties['prominent'] = !empty($scriptProperties['prominent']) ? 1 : 0;
-$album->fromArray($scriptProperties);
-
-if ($album->save() == false) {
-    return $modx->error->failure($modx->lexicon('gallery.album_err_save'));
-}
-
-/* output */
-$albumArray = $album->toArray('',true);
-return $modx->error->success('',$albumArray);

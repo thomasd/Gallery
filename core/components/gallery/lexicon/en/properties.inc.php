@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,10 +20,12 @@
  * @package gallery
  */
 /**
+ * @var array $_lang
  * @package gallery
  * @subpackage lexicon
  */
 /* Gallery Snippet */
+$_lang['gallery.activecls_desc'] = 'The CSS class to add when the active item (the item specified in the GalleryItem snippet) is displayed.';
 $_lang['gallery.album_desc'] = 'Will load only items from this album. Can be either the name or ID of the Album.';
 $_lang['gallery.albumrequestvar_desc'] = 'If checkForRequestAlbumVar is set to true, will look for a REQUEST var with this name to select the album.';
 $_lang['gallery.checkforrequestalbumvar_desc'] = 'If 1, if a REQUEST var of "album" is found, will use that as the album property for the snippet.';
@@ -55,7 +57,7 @@ $_lang['gallery.thumbquality_desc'] = 'The "q" value for phpThumb for the thumbn
 $_lang['gallery.thumbtpl_desc'] = 'The Chunk to use as a tpl for each thumbnail.';
 $_lang['gallery.thumbwidth_desc'] = 'The width of the generated thumbnails, in pixels.';
 $_lang['gallery.thumbzoomcrop_desc'] = 'Whether or not the thumbnail will be zoom-cropped.';
-$_lang['gallery.usecss_desc'];
+$_lang['gallery.usecss_desc'] = 'Whether or not to use the pre-provided CSS for the snippet.';
 
 /* GalleryAlbums Snippet */
 $_lang['galleryalbums.albumrequestvar_desc'] = 'If checkForRequestAlbumVar is set to true, will look for a REQUEST var with this name to select the album.';

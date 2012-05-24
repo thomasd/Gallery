@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,16 +20,11 @@
  * @package gallery
  */
 /**
- * Loads the album editing page.
- *
  * @package gallery
- * @subpackage controllers
+ * @subpackage lexicon
+ *
+ * @author modxcms.cz
+ * @updated 2011-12-09
  */
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/core/modx.view.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/utils/ddview.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/widgets/album/album.items.view.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/widgets/album/album.panel.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/sections/album/update.js');
-$output = '<div id="gal-panel-album-div"></div>';
-
-return $output;
+// $_lang['gallery.plugin_err_load'] = 'Couldnt load plugin "[[+name]]" from path: [[+path]]';
+$_lang['gallery.plugin_err_load'] = 'Nelze načíst plugin "[[+name]]" z umístění: [[+path]]';

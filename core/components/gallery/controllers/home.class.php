@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,20 +20,17 @@
  * @package gallery
  */
 /**
- * Loads the header for mgr pages.
+ * Loads the home page.
  *
  * @package gallery
  * @subpackage controllers
  */
-$modx->regClientCSS($gallery->config['cssUrl'].'mgr.css');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/gallery.js');
-$modx->regClientStartupHTMLBlock('<script type="text/javascript">
-Ext.onReady(function() {
-    GAL.config = '.$modx->toJSON($gallery->config).';
-    GAL.config.connector_url = "'.$gallery->config['connectorUrl'].'";
-    GAL.request = '.$modx->toJSON($_GET).';
-    GAL.action = "'.(!empty($_REQUEST['a']) ? $_REQUEST['a'] : 0).'";
-});
-</script>');
-
-return '';
+class GalleryHomeManagerController extends GalleryManagerController {
+    public function getPageTitle() { return $this->modx->lexicon('gallery'); }
+    public function loadCustomCssJs() {
+        $this->addJavascript($this->gallery->config['jsUrl'].'mgr/widgets/album/album.tree.js');
+        $this->addJavascript($this->gallery->config['jsUrl'].'mgr/widgets/home.panel.js');
+        $this->addLastJavascript($this->gallery->config['jsUrl'].'mgr/sections/home.js');
+    }
+    public function getTemplateFile() { return $this->gallery->config['templatesPath'].'home.tpl'; }
+}

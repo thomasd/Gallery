@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,20 +20,7 @@
  * @package gallery
  */
 /**
- * Delete an item entirely
- *
  * @package gallery
+ * @subpackage lexicon
  */
-
-/* get item */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('gallery.item_err_ns'));
-$item = $modx->getObject('galItem',$scriptProperties['id']);
-if (empty($item)) return $modx->error->failure($modx->lexicon('gallery.item_err_nf'));
-
-/* remove item */
-if (!$item->remove()) {
-    return $modx->error->failure($modx->lexicon('gallery.item_err_remove'));
-}
-
-/* output to browser */
-return $modx->error->success('',$item);
+$_lang['gallery.plugin_err_load'] = 'Kon de plugin "[[+name]]" niet laden in pad: [[+path]]';

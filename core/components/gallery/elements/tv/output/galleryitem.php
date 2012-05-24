@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -66,7 +66,8 @@ if (!empty($value) && $value != '{}') {
             'f' => 'png',
         )).$filters.$other;
 
-        $value = '<img src="'.$url.'" alt="'.$data['gal_description'].'" title="'.$data['gal_name'].'" class="'.$data['gal_class'].'" />';
+        $class = !empty($data['gal_class']) ? 'class="'.$data['gal_class'].'"' : '';
+        $value = '<img src="'.$url.'" alt="'.$data['gal_description'].'" title="'.$data['gal_name'].'" '.$class.' />';
     } else {
         $value = '';
     }

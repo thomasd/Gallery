@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -34,7 +34,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','Gallery');
 define('PKG_NAME_LOWER','gallery');
-define('PKG_VERSION','1.2.0');
+define('PKG_VERSION','1.5.0');
 define('PKG_RELEASE','rc1');
 
 /* define sources */
@@ -230,6 +230,9 @@ if (empty($menu)) {
     ));
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.albumfiles.php',
+    ));
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'resolve.extpack.php',
     ));
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');

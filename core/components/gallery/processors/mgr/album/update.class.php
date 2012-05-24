@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,14 +20,20 @@
  * @package gallery
  */
 /**
- * Loads the home page.
- *
+ * @var modX $modx
+ * 
  * @package gallery
- * @subpackage controllers
+ * @subpackage processors
  */
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/widgets/album/album.tree.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/widgets/home.panel.js');
-$modx->regClientStartupScript($gallery->config['jsUrl'].'mgr/sections/home.js');
-$output = '<div id="gal-panel-home-div"></div>';
+class GalleryAlbumUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'galAlbum';
+    public $objectType = 'gallery.album';
+    public $languageTopics = array('gallery:default');
 
-return $output;
+    public function beforeSet() {
+        $this->setCheckbox('active');
+        $this->setCheckbox('prominent');
+        return parent::beforeSet();
+    }
+}
+return 'GalleryAlbumUpdateProcessor';

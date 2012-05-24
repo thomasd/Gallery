@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -23,14 +23,9 @@
  * @package gallery
  * @subpackage processors
  */
-/* get board */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('gallery.album_err_ns'));
-$album = $modx->getObject('galAlbum',$scriptProperties['id']);
-if (!$album) return $modx->error->failure($modx->lexicon('gallery.album_err_nf'));
-
-if ($album->remove() == false) {
-    return $modx->error->failure($modx->lexicon('gallery.album_err_remove'));
+class GalleryAlbumRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'galAlbum';
+    public $objectType = 'gallery.album';
+    public $languageTopics = array('gallery:default');
 }
-
-/* output */
-return $modx->error->success('',$album);
+return 'GalleryAlbumRemoveProcessor';

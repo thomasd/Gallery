@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -141,7 +141,7 @@ $properties = array(
     array(
         'name' => 'thumbFar',
         'desc' => 'galleryitem.thumbfar_desc',
-        'type' => 'combo-boolean',
+        'type' => 'textfield',
         'options' => '',
         'value' => 'C',
         'lexicon' => 'gallery:properties',
@@ -211,3 +211,5 @@ $properties = array(
         'lexicon' => 'gallery:properties',
     ),
 );
+
+return $properties;

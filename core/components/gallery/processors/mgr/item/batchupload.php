@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -54,7 +54,7 @@ $modx->getService('fileHandler','modFileHandler');
 $fullpath = $modx->fileHandler->sanitizePath($directory);
 
 
-$targetDir = $modx->getOption('gallery.files_path').$scriptProperties['album'].'/';
+$targetDir = $modx->call('galAlbum','getFilesPath',array(&$modx)).$scriptProperties['album'].'/';
 
 $cacheManager = $modx->getCacheManager();
 /* if directory doesnt exist, create it */

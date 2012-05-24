@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -20,9 +20,11 @@
  * @package gallery
  */
 /**
+ * Media Source English Lexicon Entries for Gallery
+ *
+ * @var array $_lang
  * @package gallery
- * @subpackage controllers
+ * @subpackage lexicon
  */
-require_once dirname(dirname(__FILE__)).'/model/gallery/gallery.class.php';
-$gallery = new Gallery($modx);
-return $gallery->initialize('mgr');
+$_lang['gallery.source_name'] = 'Gallery Albums';
+$_lang['gallery.source_desc'] = 'A source that lists all available Gallery Albums.';

@@ -2,7 +2,7 @@
 /**
  * Gallery
  *
- * Copyright 2010-2011 by Shaun McCormick <shaun@modx.com>
+ * Copyright 2010-2012 by Shaun McCormick <shaun@modx.com>
  *
  * Gallery is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
@@ -33,7 +33,7 @@ $modx->addPackage('gallery',$corePath.'model/');
 
 if (!empty($this->value)) {
     $data = $modx->fromJSON($this->value);
-    if (is_array($data)) {
+    if (is_array($data) && !empty($data['gal_id'])) {
         $item = $modx->getObject('galItem',$data['gal_id']);
         if ($item) {
             $item->getSize();
